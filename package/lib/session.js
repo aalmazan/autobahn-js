@@ -1127,7 +1127,7 @@ Session.prototype.log = function () {
 };
 
 
-Session.prototype.join = function (realm, authmethods, authid) {
+Session.prototype.join = function (realm, authmethods, authid, transport_info) {
 
    util.assert(typeof realm === 'string', "Session.join: <realm> must be a string");
    util.assert(!authmethods || Array.isArray(authmethods), "Session.join: <authmethods> must be an array []");
@@ -1150,6 +1150,9 @@ Session.prototype.join = function (realm, authmethods, authid) {
    }
    if (authid) {
       details.authid = authid;
+   }
+   if (transport_info) {
+      details.transport_info = transport_info;
    }
 
    var msg = [MSG_TYPE.HELLO, realm, details];
